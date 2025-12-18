@@ -1,5 +1,6 @@
-import StartPage from './pages/StartPage'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router'
 
 export default function App() {
-  return <StartPage />
+  return <RouterProvider router={router} />
 }
