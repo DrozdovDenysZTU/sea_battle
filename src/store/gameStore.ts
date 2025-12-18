@@ -33,7 +33,8 @@ export const useGameStore = create<GameStore>((set) => ({
   results: localStorage.getItem('game-results')
     ? JSON.parse(localStorage.getItem('game-results')!)
     : [],
-  playerName: localStorage.getItem('playerName') || '',
+  playerName: localStorage.getItem('player-name') || '',
+
   setSettings: (settings) => {
     localStorage.setItem('game-settings', JSON.stringify(settings))
     set({ settings })
@@ -49,7 +50,7 @@ export const useGameStore = create<GameStore>((set) => ({
     set((state) => ({ results: [...state.results, result] }))
   },
   setPlayerName: (name) => {
-    localStorage.setItem('playerName', name)
+    localStorage.setItem('player-name', name)
     set({ playerName: name })
   }
 }))

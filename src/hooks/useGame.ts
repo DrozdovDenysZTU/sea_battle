@@ -51,7 +51,6 @@ export function useGame(settings: GameSettings) {
     finished,
     win,
     fire,
-    restart,
-    setFinished
+    restart
   }
 }
