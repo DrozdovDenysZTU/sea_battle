@@ -5,7 +5,9 @@ export interface GameResult {
   userId: string
   moves: number
   date: string
-  hits?: number
+  hits: number
+  win: boolean
+  userName?: string
 }
 
 interface GameStore {
@@ -28,14 +30,24 @@ export const useGameStore = create<GameStore>((set) => ({
   settings: localStorage.getItem('game-settings')
     ? JSON.parse(localStorage.getItem('game-settings')!)
     : DEFAULT_SETTINGS,
-  results: [],
+  results: localStorage.getItem('game-results')
+    ? JSON.parse(localStorage.getItem('game-results')!)
+    : [],
   playerName: localStorage.getItem('playerName') || '',
   setSettings: (settings) => {
     localStorage.setItem('game-settings', JSON.stringify(settings))
     set({ settings })
   },
-  addResult: (result) =>
-    set((state) => ({ results: [...state.results, result] })),
+  addResult: (result) => {
+    localStorage.setItem(
+      'game-results',
+      JSON.stringify([
+        ...JSON.parse(localStorage.getItem('game-results') || '[]'),
+        result
+      ])
+    )
+    set((state) => ({ results: [...state.results, result] }))
+  },
   setPlayerName: (name) => {
     localStorage.setItem('playerName', name)
     set({ playerName: name })

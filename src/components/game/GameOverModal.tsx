@@ -5,13 +5,23 @@ interface Props {
   moves: number
   onRestart: () => void
   onNext: () => void
+  win: boolean
 }
 
-export default function GameOverModal({ moves, onRestart, onNext }: Props) {
+export default function GameOverModal({
+  moves,
+  onRestart,
+  onNext,
+  win
+}: Props) {
   return createPortal(
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
       <div className="bg-white p-6 rounded space-y-4 w-64">
-        <h3 className="text-lg font-semibold text-center">Game Over</h3>
+        {win ? (
+          <h3 className="text-lg font-semibold text-center">You Win!</h3>
+        ) : (
+          <h3 className="text-lg font-semibold text-center">Game Over</h3>
+        )}
 
         <p className="text-center">Moves: {moves}</p>
 

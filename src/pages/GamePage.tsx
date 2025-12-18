@@ -21,7 +21,9 @@ export default function GamePage() {
       userId: userId!,
       moves: game.moves,
       date: new Date().toISOString(),
-      hits
+      hits,
+      win: game.win,
+      userName: playerName
     })
     navigate('/results')
   }
@@ -67,6 +69,7 @@ export default function GamePage() {
 
         {game.finished && (
           <GameOverModal
+            win={game.win}
             moves={game.moves}
             onRestart={game.restart}
             onNext={handleFinish}
