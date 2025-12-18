@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: #e0e7ef;
+  background-color: #1a2233;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  background: linear-gradient(135deg, #1a2233 0%, #283e51 100%);
+}
+
+a {
+  font-weight: 500;
+  color: #4fd1c5;
+  text-decoration: inherit;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #38b2ac;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #1a2233 0%, #283e51 100%);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: #90cdf4;
+  text-shadow: 0 2px 8px #1a2233;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid #4fd1c5;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #283e51;
+  color: #e0e7ef;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s, color 0.25s;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.15);
+}
+button:hover {
+  border-color: #38b2ac;
+  background: #334e68;
+  color: #4fd1c5;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto #4fd1c5;
+}
+
+.card,
+.Card {
+  background: #22304a;
+  color: #e0e7ef;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.18);
+  padding: 1.5em;
+  margin: 1em 0;
+  border: 1px solid #334e68;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #f4f8fb;
+  }
+  #root,
+  body {
+    background: linear-gradient(135deg, #f4f8fb 0%, #dbeafe 100%);
+  }
+  a {
+    color: #2563eb;
+  }
+  a:hover {
+    color: #1e40af;
+  }
+  h1 {
+    color: #2563eb;
+    text-shadow: 0 2px 8px #dbeafe;
+  }
+  button {
+    background-color: #e0e7ef;
+    color: #2563eb;
+    border-color: #2563eb;
+  }
+  button:hover {
+    background: #dbeafe;
+    color: #1e40af;
+    border-color: #1e40af;
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto #2563eb;
+  }
+  .card,
+  .Card {
+    background: #f4f8fb;
+    color: #213547;
+    border: 1px solid #dbeafe;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+  }
+}
