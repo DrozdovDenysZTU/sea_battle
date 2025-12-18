@@ -4,4 +4,5 @@ export interface GameSettings {
   difficulty: Difficulty
   boardSize: number
   maxMoves: number
+  ships: number
 }

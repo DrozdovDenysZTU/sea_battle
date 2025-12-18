@@ -21,9 +21,14 @@ export default function ResultsPage() {
 
         <ul className="space-y-2 mb-4">
           {results.map((r, i) => (
-            <li key={i} className="flex justify-between text-sm">
-              <span>{r.userId.slice(0, 6)}</span>
+            <li key={i} className="flex justify-between text-sm items-center">
+              <span className="font-mono">{r.userId.slice(0, 6)}</span>
               <span>{r.moves} moves</span>
+              {typeof r.hits === 'number' && (
+                <span className="ml-2 text-green-700 font-semibold">
+                  {r.hits} hits
+                </span>
+              )}
             </li>
           ))}
         </ul>

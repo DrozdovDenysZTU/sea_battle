@@ -15,11 +15,12 @@ export default function Board({ board, onFire, size = 5 }: Props) {
       {board.map((cell, i) => (
         <div
           key={i}
-          onClick={() => onFire(i)}
+          onClick={() => cell === 'empty' && onFire(i)}
           className={`w-10 h-10 cursor-pointer flex items-center justify-center
             ${cell === 'empty' && 'bg-blue-300'}
             ${cell === 'hit' && 'bg-red-500'}
             ${cell === 'miss' && 'bg-gray-400'}
+            ${cell !== 'empty' && 'pointer-events-none opacity-60'}
           `}
         />
       ))}

@@ -5,6 +5,7 @@ export interface GameResult {
   userId: string
   moves: number
   date: string
+  hits?: number
 }
 
 interface GameStore {
@@ -19,11 +20,14 @@ interface GameStore {
 const DEFAULT_SETTINGS: GameSettings = {
   difficulty: 'easy',
   boardSize: 5,
-  maxMoves: 8
+  maxMoves: 8,
+  ships: 3
 }
 
 export const useGameStore = create<GameStore>((set) => ({
-  settings: DEFAULT_SETTINGS,
+  settings: localStorage.getItem('game-settings')
+    ? JSON.parse(localStorage.getItem('game-settings')!)
+    : DEFAULT_SETTINGS,
   results: [],
   playerName: localStorage.getItem('playerName') || '',
   setSettings: (settings) => {

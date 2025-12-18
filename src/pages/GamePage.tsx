@@ -13,11 +13,15 @@ export default function GamePage() {
   const { playerName, settings, addResult } = useGameStore()
   const game = useGame(settings)
 
+  const hits = game.board.filter((cell) => cell === 'hit').length
+  const totalHits = settings.ships
+
   function handleFinish() {
     addResult({
       userId: userId!,
       moves: game.moves,
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      hits
     })
     navigate('/results')
   }
@@ -35,7 +39,14 @@ export default function GamePage() {
           size={settings.boardSize}
         />
 
-        <p className="text-center mt-3">Moves: {game.moves}</p>
+        <div className="flex justify-center gap-6 my-2">
+          <span className="text-gray-700 font-semibold">
+            Hits: {hits}/{totalHits}
+          </span>
+          <span className="text-gray-700 font-semibold">
+            Moves: {game.moves}/{settings.maxMoves}
+          </span>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-3 mt-4">
           <button

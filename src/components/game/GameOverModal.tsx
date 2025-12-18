@@ -19,7 +19,9 @@ export default function GameOverModal({ moves, onRestart, onNext }: Props) {
           <Button onClick={onRestart} variant="secondary">
             Restart
           </Button>
-          <Button onClick={onNext}>Next Round</Button>
+          <Button onClick={onNext} className="text-nowrap">
+            See Results
+          </Button>
         </div>
       </div>
     </div>,

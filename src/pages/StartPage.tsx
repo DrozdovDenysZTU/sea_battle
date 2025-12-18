@@ -30,6 +30,9 @@ export default function StartPage() {
           <Button variant="secondary" onClick={() => navigate('/settings')}>
             Settings
           </Button>
+          <Button variant="secondary" onClick={() => navigate('/results')}>
+            Results
+          </Button>
         </div>
       </Card>
     </PageLayout>
