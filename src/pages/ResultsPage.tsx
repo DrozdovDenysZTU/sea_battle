@@ -2,22 +2,28 @@ import PageLayout from '../components/layout/PageLayout'
 import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import { useNavigate } from 'react-router-dom'
-import { useResults } from '../hooks/useResults'
+import { useGameStore } from '../store/gameStore'
 
 export default function ResultsPage() {
-  const { results } = useResults()
   const navigate = useNavigate()
+  const results = useGameStore((s) => s.results)
 
   return (
     <PageLayout>
       <Card>
-        <h2 className="text-xl font-semibold text-center mb-4">Results</h2>
+        <h2 className="text-xl font-semibold text-center mb-4">
+          Results Table
+        </h2>
+
+        {results.length === 0 && (
+          <p className="text-center text-gray-500">No games played yet</p>
+        )}
 
         <ul className="space-y-2 mb-4">
           {results.map((r, i) => (
-            <li key={i} className="flex justify-between">
-              <span>{r.name}</span>
-              <span>{r.moves}</span>
+            <li key={i} className="flex justify-between text-sm">
+              <span>{r.userId.slice(0, 6)}</span>
+              <span>{r.moves} moves</span>
             </li>
           ))}
         </ul>
