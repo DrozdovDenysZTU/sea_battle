@@ -10,7 +10,7 @@ export default function GamePage() {
   const { userId } = useParams<{ userId: string }>()
   const navigate = useNavigate()
 
-  const { settings, addResult } = useGameStore()
+  const { playerName, settings, addResult } = useGameStore()
   const game = useGame(settings)
 
   function handleFinish() {
@@ -25,7 +25,9 @@ export default function GamePage() {
   return (
     <PageLayout>
       <Card>
-        <h2 className="text-center mb-2">Player: {userId?.slice(0, 6)}</h2>
+        <h2 className="text-center mb-2">
+          Player: {playerName ? playerName : userId?.slice(0, 6)}
+        </h2>
 
         <Board
           board={game.board}
@@ -34,6 +36,23 @@ export default function GamePage() {
         />
 
         <p className="text-center mt-3">Moves: {game.moves}</p>
+
+        <div className="flex flex-col sm:flex-row gap-3 mt-4">
+          <button
+            type="button"
+            className="w-full py-2 text-base rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800 shadow"
+            onClick={() => navigate('/')}
+          >
+            Back to Start Page
+          </button>
+          <button
+            type="button"
+            className="w-full py-2 text-base rounded-lg bg-blue-200 hover:bg-blue-300 text-blue-800 shadow"
+            onClick={game.restart}
+          >
+            Restart
+          </button>
+        </div>
 
         {game.finished && (
           <GameOverModal

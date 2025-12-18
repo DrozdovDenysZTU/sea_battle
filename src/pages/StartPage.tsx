@@ -2,10 +2,10 @@ import PageLayout from '../components/layout/PageLayout'
 import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import { useNavigate } from 'react-router-dom'
-import { useStartPage } from '../hooks/useStartPage'
+import { useGameStore } from '../store/gameStore'
 
 export default function StartPage() {
-  const { playerName, setPlayerName } = useStartPage()
+  const { playerName, setPlayerName } = useGameStore()
   const navigate = useNavigate()
 
   function handleStart() {
