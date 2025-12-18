@@ -27,7 +27,11 @@ export default function GamePage() {
       <Card>
         <h2 className="text-center mb-2">Player: {userId?.slice(0, 6)}</h2>
 
-        <Board board={game.board} onFire={game.fire} />
+        <Board
+          board={game.board}
+          onFire={game.fire}
+          size={settings.boardSize}
+        />
 
         <p className="text-center mt-3">Moves: {game.moves}</p>
 
