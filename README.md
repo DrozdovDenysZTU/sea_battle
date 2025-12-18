@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# Sea Battle Game (React + Vite + TypeScript)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Game Screenshot](./public/startPage.png)
 
-Currently, two official plugins are available:
+## Опис проєкту
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Простий браузерний варіант гри **Морський Бій**, реалізований на React з використанням:
 
-## React Compiler
+- **Vite** як bundler
+- **TypeScript** для типізації
+- **Tailwind CSS** для стилізації
+- **React Hook Form** для налаштувань гри
+- **Zustand** для глобального стану гри
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Проєкт розбитий на п’ять логічних кроків:
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Кроки реалізації
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 1. Каркас застосунку
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Створено базові сторінки: **Start**, **Game**, **Results**.
+- Початкові стани та плейсхолдери для компонентів.
+- Структура проекту дозволяє легке перевикористання компонентів.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 2. Основна логіка гри
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Додані кастомні хуки для управління станом гри (`useGame`).
+- Кожен компонент залишився максимально чистим.
+- Реалізація базового процесу ходів: `fire`, `restart`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 3. Налаштування гри
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Реалізована форма налаштувань з **React Hook Form** та валідацією.
+- Налаштування включають: складність, розмір дошки, максимальну кількість ходів.
+- Додано **портал для GameOverModal**, який показує завершення гри та варіанти перезапуску або переходу до результатів.
+
+### 4. Стилізація та роутинг
+
+- Використано **Tailwind CSS** для стилізації компонентів та гри.
+- Реалізовано **динамічний роутинг** через React Router з підтримкою `userId`.
+- Структура проекту дозволяє легке додавання нових сторінок.
+
+### 5. Глобальний стан
+
+- Використано **Zustand** для управління глобальним станом: налаштування гри, результати користувачів.
+- Логіка гри інтегрована з глобальним state.
+- Зберігання результатів гри та налаштувань у **localStorage**.
+
+---
+
+## Скриншот гри
+
+![Game Screenshot](./public/gamePage.png)
+
+---
+
+## Запуск проекту
+
+```bash
+# Встановити залежності
+npm install
+
+# Запуск у режимі розробки
+npm run dev
+
+# Білд для продакшну
+npm run build
 ```
