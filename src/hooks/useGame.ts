@@ -1,16 +1,19 @@
 import { useState } from 'react'
+import type { GameSettings } from '../types/settings'
 
 export type CellState = 'empty' | 'hit' | 'miss'
 
-export function useGame(boardSize = 5) {
+export function useGame(settings: GameSettings) {
+  const size = settings.boardSize
+
   const [board, setBoard] = useState<CellState[]>(
-    Array(boardSize * boardSize).fill('empty')
+    Array(size * size).fill('empty')
   )
   const [moves, setMoves] = useState(0)
-  const [isFinished, setIsFinished] = useState(false)
+  const [finished, setFinished] = useState(false)
 
   function fire(index: number) {
-    if (isFinished) return
+    if (finished) return
 
     setBoard((prev) => {
       const copy = [...prev]
@@ -18,23 +21,25 @@ export function useGame(boardSize = 5) {
       return copy
     })
 
-    setMoves((m) => m + 1)
-
-    if (moves >= boardSize) {
-      setIsFinished(true)
-    }
+    setMoves((m) => {
+      const next = m + 1
+      if (next >= settings.maxMoves) {
+        setFinished(true)
+      }
+      return next
+    })
   }
 
   function restart() {
-    setBoard(Array(boardSize * boardSize).fill('empty'))
+    setBoard(Array(size * size).fill('empty'))
     setMoves(0)
-    setIsFinished(false)
+    setFinished(false)
   }
 
   return {
     board,
     moves,
-    isFinished,
+    finished,
     fire,
     restart
   }

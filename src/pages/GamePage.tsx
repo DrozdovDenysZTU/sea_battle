@@ -1,27 +1,34 @@
 import PageLayout from '../components/layout/PageLayout'
 import Card from '../components/ui/Card'
 import Board from '../components/game/Board'
-import Button from '../components/ui/Button'
+import GameOverModal from '../components/game/GameOverModal'
 import { useGame } from '../hooks/useGame'
+import { useLocalStorage } from '../hooks/useLocalStorage'
+import type { GameSettings } from '../types/settings'
+
+const DEFAULT: GameSettings = {
+  difficulty: 'easy',
+  boardSize: 5,
+  maxMoves: 8
+}
 
 export default function GamePage() {
-  const { board, moves, isFinished, fire, restart } = useGame()
+  const [settings] = useLocalStorage<GameSettings>('game-settings', DEFAULT)
+
+  const game = useGame(settings)
 
   return (
     <PageLayout>
       <Card>
-        <h2 className="text-xl font-semibold text-center mb-4">Game</h2>
+        <Board board={game.board} onFire={game.fire} />
+        <p className="text-center mt-3">Moves: {game.moves}</p>
 
-        <div className="flex justify-center mb-4">
-          <Board board={board} onFire={fire} />
-        </div>
-
-        <p className="text-center mb-4">Moves: {moves}</p>
-
-        {isFinished && (
-          <Button variant="secondary" onClick={restart}>
-            Restart
-          </Button>
+        {game.finished && (
+          <GameOverModal
+            moves={game.moves}
+            onRestart={game.restart}
+            onNext={game.restart}
+          />
         )}
       </Card>
     </PageLayout>
