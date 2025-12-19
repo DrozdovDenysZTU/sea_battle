@@ -1,8 +1,8 @@
 import PageLayout from '../components/layout/PageLayout'
 import Card from '../components/ui/Card'
 import { useGameStore } from '../store/gameStore'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 const DIFFICULTY_PRESETS: Record<
   'easy' | 'medium' | 'hard',
@@ -13,27 +13,28 @@ const DIFFICULTY_PRESETS: Record<
   hard: { boardSize: 10, ships: 8, maxMoves: 20 }
 }
 
+type FormValues = {
+  difficulty: 'easy' | 'medium' | 'hard'
+}
+
 export default function SettingsPage() {
   const { settings, setSettings } = useGameStore()
-  const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>(
-    settings.difficulty
-  )
   const navigate = useNavigate()
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDifficulty(e.target.value as 'easy' | 'medium' | 'hard')
-  }
+  const { register, handleSubmit, watch } = useForm<FormValues>({
+    defaultValues: { difficulty: settings.difficulty }
+  })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const difficulty = watch('difficulty')
+  const preset = DIFFICULTY_PRESETS[difficulty]
+
+  const onSubmit = (data: FormValues) => {
     setSettings({
-      difficulty,
-      ...DIFFICULTY_PRESETS[difficulty]
+      difficulty: data.difficulty,
+      ...DIFFICULTY_PRESETS[data.difficulty]
     })
     navigate('/')
   }
-
-  const preset = DIFFICULTY_PRESETS[difficulty]
 
   return (
     <PageLayout>
@@ -41,14 +42,14 @@ export default function SettingsPage() {
         <h2 className="text-2xl font-bold text-center mb-6 text-blue-700 drop-shadow">
           Game Settings
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label className="block font-semibold text-gray-700 mb-2">
               Difficulty
             </label>
             <select
-              value={difficulty}
-              onChange={handleChange}
+              {...register('difficulty')}
               className="border-2 border-blue-300 rounded-lg p-2 w-full focus-ring-2 focus-ring-blue-400 focus-outline-none transition"
             >
               <option value="easy">Easy</option>
@@ -57,7 +58,7 @@ export default function SettingsPage() {
             </select>
           </div>
 
-          <div className="grid grid-cols-1 sm-grid-cols-3 gap-4 text-center bg-blue-50 rounded-lg p-4 shadow-inner">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center bg-blue-50 rounded-lg p-4 shadow-inner">
             <div>
               <span className="block text-sm text-gray-500">Board Size</span>
               <span className="text-lg font-bold text-blue-800">
