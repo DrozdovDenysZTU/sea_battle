@@ -6,6 +6,11 @@ import GameOverModal from '../components/game/GameOverModal'
 import { useGame } from '../hooks/useGame'
 import { useGameStore } from '../store/gameStore'
 
+/**
+ * GamePage component that renders the game board and manages the game state using the useGame hook.
+ * It also handles navigation and result saving after the game finishes.
+ * @returns {any}
+ */
 export default function GamePage() {
   const { userId } = useParams<{ userId: string }>()
   const navigate = useNavigate()

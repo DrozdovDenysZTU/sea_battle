@@ -4,6 +4,10 @@ import Button from '../components/ui/Button'
 import { useNavigate } from 'react-router-dom'
 import { useGameStore } from '../store/gameStore'
 
+/**
+ * ResultsPage component that displays the results of the games played. It retrieves the results from the game store and renders them in a list. It also provides a button to navigate back to the start page.
+ * @returns {any}
+ */
 export default function ResultsPage() {
   const navigate = useNavigate()
   const results = useGameStore((s) => s.results)

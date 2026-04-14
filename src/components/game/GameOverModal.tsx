@@ -7,7 +7,11 @@ interface Props {
   onNext: () => void
   win: boolean
 }
-
+/**
+ * GameOverModal component that displays a modal when the game is over, showing the number of moves taken and providing options to restart the game or see the results. It uses createPortal to render the modal outside of the normal component hierarchy, allowing it to overlay the entire screen.
+ * @param {Props} props
+ * @returns {any}
+ */
 export default function GameOverModal({
   moves,
   onRestart,

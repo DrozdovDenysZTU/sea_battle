@@ -17,6 +17,10 @@ type FormValues = {
   difficulty: 'easy' | 'medium' | 'hard'
 }
 
+/**
+ * SettingsPage component that allows the user to select the game difficulty and updates the game settings in the store accordingly. It uses react-hook-form for form management and validation.
+ * @returns {any}
+ */
 export default function SettingsPage() {
   const { settings, setSettings } = useGameStore()
   const navigate = useNavigate()

@@ -4,6 +4,10 @@ import Button from '../components/ui/Button'
 import { useNavigate } from 'react-router-dom'
 import { useGameStore } from '../store/gameStore'
 
+/**
+ * StartPage component that serves as the landing page for the Sea Battle game. It allows the user to enter their name and navigate to the game, settings, or results pages. It uses the game store to manage the player's name and navigation state.
+ * @returns {any}
+ */
 export default function StartPage() {
   const { playerName, setPlayerName } = useGameStore()
   const navigate = useNavigate()

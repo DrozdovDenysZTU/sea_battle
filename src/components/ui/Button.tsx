@@ -5,6 +5,13 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary'
 }
 
+/**
+ * Button component that renders a styled button based on the provided variant and className. It uses Tailwind CSS classes for styling and supports primary and secondary variants. The component also accepts all standard button attributes through the ButtonHTMLAttributes type.
+ * @param {any} variant
+ * @param {any} className
+ * @param {Props} props
+ * @returns {any}
+ */
 export default function Button({
   variant = 'primary',
   className,

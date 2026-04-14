@@ -3,6 +3,12 @@ import type { GameSettings } from '../types/settings'
 
 export type CellState = 'empty' | 'hit' | 'miss'
 
+
+/**
+ * Custom hook to manage the game state and logic for a Battleship-like game.
+ * @param {GameSettings} settings
+ * @returns {any}
+ */
 export function useGame(settings: GameSettings) {
   const size = settings.boardSize
 

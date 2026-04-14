@@ -6,6 +6,11 @@ interface Props {
   size?: number
 }
 
+/**
+ * Board component that renders the game board based on the provided board state and size. It displays each cell as a clickable div that triggers the onFire function when clicked, allowing the player to make a move. The component uses Tailwind CSS classes for styling and visually distinguishes between empty, hit, and miss cells.
+ * @param {Props} props
+ * @returns {any}
+ */
 export default function Board({ board, onFire, size = 5 }: Props) {
   return (
     <div
